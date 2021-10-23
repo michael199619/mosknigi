@@ -1,0 +1,48 @@
+.Wrapper
+  flex-direction: column
+
+  &:hover
+    .BookCoverWrapper
+      transform: scale(1.2)
+
+    .BookCover
+      transform: scale(1.2)
+
+    .BookTitle
+      background-color: #2F2F2F
+      color: white
+    .BookInfo
+      transform: translateY(30px)
+
+
+.BookInfo
+  flex-direction: column
+  transition: 300ms ease-out
+.BookCover
+  width: 100%
+  height: 100%
+  transition: 300ms ease-out
+
+.BookTitle
+  font-size: 17px
+  font-weight: bold
+  margin-bottom: 13px
+  width: 259px
+  height: 38px
+  align-items: center
+  padding: 7px
+  transition: 300ms ease-out
+
+.BookAuthor
+  font-weight: 300
+  margin-left: 7px
+
+.BookCoverWrapper
+  width: 259px
+  height: 387px
+  border-radius: 23px
+  background-color: gray
+  margin-bottom: 35px
+  overflow: hidden
+  cursor: pointer
+  transition: 300ms ease-out
