@@ -24,9 +24,23 @@ export class BookDto {
     @Expose()
     book_img_url: string;
 
+    @ApiProperty({type: 'string'})
+    @IsString()
+    @IsOptional()
+    @Expose()
+    about: string;
+
     @ApiProperty()
     @IsNumber()
     @IsOptional()
     @Expose()
     release_year: number;
+}
+
+export class BookResponsesDto extends BookDto {
+    @ApiProperty({})
+    @IsNumber()
+    @IsOptional()
+    @Expose()
+    id: number;
 }

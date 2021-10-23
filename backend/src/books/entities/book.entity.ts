@@ -34,6 +34,11 @@ export class Book extends BaseEntity {
   public title: string;
 
   @Column({
+    type: 'varchar', nullable: true
+  })
+  public about: string;
+
+  @Column({
     type: 'numeric', nullable: true
   })
   public release_year: number;
@@ -50,6 +55,7 @@ export class Book extends BaseEntity {
       status: this.status,
       author: this.author,
       release_year: this.release_year,
+      about: this.about,
       book_img_url: this.book_img_url,
     };
   }

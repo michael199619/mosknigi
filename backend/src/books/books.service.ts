@@ -3,7 +3,7 @@ import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
 import {EntityManager, LessThan, MoreThan} from 'typeorm';
 import {Repository} from 'typeorm';
 import {Book} from './entities';
-import { BookDto }from './dto/book.dto';
+import {BookDto, BookResponsesDto} from './dto/book.dto';
 
 @Injectable()
 export class BooksService {
@@ -31,5 +31,21 @@ export class BooksService {
             .getOne();
 
         return book;
+    }
+
+    public async createBook(body: BookDto): Promise<BookResponsesDto> {
+        return await this.bRepo.save(body);
+    }
+
+    public async recommendations(id: number): Promise<void> {
+
+    }
+
+    public async removeBookFavoriteById(id: number): Promise<void> {
+
+    }
+
+    public async addBookFavoriteById(id: number): Promise<void> {
+
     }
 }

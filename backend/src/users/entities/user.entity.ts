@@ -26,17 +26,7 @@ export class User extends BaseEntity {
   @Column({
     type: 'varchar', nullable: true
   })
-  public firstName: string;
-
-  @Column({
-    type: 'varchar', nullable: true
-  })
   public avatar: string;
-
-  @Column({
-    type: 'varchar', nullable: true
-  })
-  public lastName: string;
 
   @Column({
     type: 'varchar', enum: USER_STATUS, default: USER_STATUS.NOACTIVE, nullable: true
@@ -47,9 +37,7 @@ export class User extends BaseEntity {
     return {
       id: this.id,
       age: this.age,
-      status: this.status,
-      firstName: this.firstName,
-      lastName: this.lastName,
+      status: this.status
     };
   }
 }

@@ -12,24 +12,6 @@ export class UserDto {
     @Expose()
     age: number;
 
-    @ApiProperty({type: 'string'})
-    @IsString()
-    @IsOptional()
-    @Expose()
-    firstName: string;
-
-    @ApiProperty({type: 'string'})
-    @IsString()
-    @IsOptional()
-    @Expose()
-    lastName: string;
-
-    @ApiProperty()
-    @IsInt()
-    @IsOptional()
-    @Expose()
-    roleId: number;
-
     @ApiProperty()
     @IsString()
     @IsOptional()
