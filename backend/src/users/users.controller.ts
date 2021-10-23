@@ -9,15 +9,9 @@ export class UsersController {
   constructor(private usersService: UsersService) {
   }
 
-  @Get('roles')
-  async getRoles() {
-    return await this.usersService.getRoles();
-  }
-
   @Get()
-  @ApiQuery({name:'role',required: false})
-  async getUsers( @Query('role') role: string = '') {
-    return await this.usersService.getUsers(role);
+  async getUsers() {
+    return await this.usersService.getUsers();
   }
 
   @Get(':id')
