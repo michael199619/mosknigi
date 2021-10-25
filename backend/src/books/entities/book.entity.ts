@@ -1,10 +1,11 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable, ManyToOne,
 } from 'typeorm';
 
 import { BaseEntity } from '../../shared/entities';
+import {User} from "../../users/entities";
 
 export const BOOK_STATUS = {
   ADD: 'ADD',
@@ -23,10 +24,9 @@ export class Book extends BaseEntity {
   })
   public author: string;
 
-  @Column({
-    type: 'varchar', nullable: true
-  })
-  public book_img_url: string;
+  @ManyToMany(() => User, user => user.history, {onDelete: "CASCADE"})
+  public users: User[];
+
 
   @Column({
     type: 'varchar', nullable: true
@@ -39,9 +39,29 @@ export class Book extends BaseEntity {
   public about: string;
 
   @Column({
+    type: 'varchar', nullable: true
+  })
+  public lang: string;
+
+  @Column({
+    type: 'varchar', nullable: true
+  })
+  public theme: string;
+
+  @Column({
+    type: 'varchar', nullable: true
+  })
+  public url: string;
+
+  @Column({
     type: 'numeric', nullable: true
   })
   public release_year: number;
+
+  @Column({
+    type: 'varchar', nullable: true
+  })
+  public age: string;
 
   @Column({
     type: 'varchar', enum: BOOK_STATUS, nullable: true
@@ -54,9 +74,11 @@ export class Book extends BaseEntity {
       title: this.title,
       status: this.status,
       author: this.author,
+      age: this.age,
+      lang: this.lang,
+      theme: this.theme,
       release_year: this.release_year,
       about: this.about,
-      book_img_url: this.book_img_url,
     };
   }
 }

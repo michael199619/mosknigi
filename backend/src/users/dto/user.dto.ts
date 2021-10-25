@@ -4,6 +4,7 @@ import {
 
 import {Expose, Transform, Type} from 'class-transformer';
 import {ApiProperty} from "@nestjs/swagger";
+import {BookResponsesDto} from "../../books/dto/book.dto";
 
 export class UserDto {
     @ApiProperty({minimum: 1})
@@ -17,4 +18,12 @@ export class UserDto {
     @IsOptional()
     @Expose()
     avatar: string;
+}
+export class ResponseUserDto extends UserDto {
+    @ApiProperty({type: () => BookResponsesDto})
+    @IsOptional()
+    @Expose()
+    @Type(e => BookResponsesDto)
+    @ValidateNested()
+    history: BookResponsesDto[];
 }

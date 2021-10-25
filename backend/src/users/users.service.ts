@@ -19,17 +19,13 @@ export class UsersService {
         await this.uRepo.delete(id);
     }
 
-    public async getUsers(): Promise<User[]> {
-        const users = this.entityManager.createQueryBuilder(User, 'user');
-
-        return await users.getMany();
+    public async getUsers(skip: number, take: number): Promise<User[]> {
+        const users = await this.uRepo.find({take, skip, relations: ['history']});
+        return users
     }
 
     public async getUserById(id: number): Promise<User> {
-        const user = await this.entityManager.createQueryBuilder(User, 'user')
-            .where('user.id = :id', {id})
-            .getOne();
-
+        const user = await this.uRepo.findOne(id, {relations: ['history']});
         return user;
     }
 

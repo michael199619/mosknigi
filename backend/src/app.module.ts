@@ -1,7 +1,6 @@
 import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {BooksModule} from './books/books.module';
-import {AuthModule} from './auth/auth.module';
 import {UsersModule} from './users/users.module';
 import {AppConfigModule} from './config/config.module';
 import {ConfigModule, ConfigService} from '@nestjs/config';
@@ -16,7 +15,6 @@ import {SeedService} from './db/seed.service';
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => configService.get<ConnectionOptions>('db'),
         }),
-        AuthModule,
         UsersModule,
         BooksModule,
     ],

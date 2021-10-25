@@ -22,13 +22,31 @@ export class BookDto {
     @IsString()
     @IsOptional()
     @Expose()
-    book_img_url: string;
+    lang: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsOptional()
+    @Expose()
+    age: string;
 
     @ApiProperty({type: 'string'})
     @IsString()
     @IsOptional()
     @Expose()
     about: string;
+
+    @ApiProperty({type: 'string'})
+    @IsString()
+    @IsOptional()
+    @Expose()
+    url: string;
+
+    @ApiProperty({type: 'string'})
+    @IsString()
+    @IsOptional()
+    @Expose()
+    theme: string;
 
     @ApiProperty()
     @IsNumber()

@@ -9,10 +9,16 @@ export class BooksController {
   constructor(private booksService: BooksService) {
   }
 
+  @ApiQuery({example: 0, name: 'skip'})
+  @ApiQuery({example: 10, name: 'take'})
   @ApiOkResponse({type: [BookResponsesDto]})
   @Get('')
-  async getBooks() {
-    return await this.booksService.getBooks();
+  async getBooks(
+      @Query('skip') skip: number = 0,
+      @Query('take') take: number = 10,
+      @Query('userId') userId: number
+  ) {
+    return await this.booksService.getBooks(skip, take, userId);
   }
 
   @ApiOkResponse({type: BookResponsesDto})
@@ -22,28 +28,42 @@ export class BooksController {
   }
 
   @Get('/recommendations')
-  async recommendations(@Param('id') id: number) {
-    return await this.booksService.recommendations(id);
+  async recommendations(
+      @Param('id') id: number,
+      @Query('userId') userId: number
+  ) {
+    return await this.booksService.recommendations(id, userId);
   }
 
   @ApiOkResponse({type: BookResponsesDto})
   @Get(':id')
-  async getBookById(@Param('id') id: number) {
-    return await this.booksService.getBookById(id);
+  async getBookById(
+      @Param('id') id: number,
+      @Query('userId') userId: number
+  ) {
+    return await this.booksService.getBookById(id, userId);
   }
 
   @Post(':id/add-favorite')
-  async addBookFavoriteById(@Param('id') id: number) {
-    return await this.booksService.addBookFavoriteById(id);
+  async addBookFavoriteById(
+      @Param('id') id: number,
+      @Query('userId') userId: number
+  ) {
+    return await this.booksService.addBookFavoriteById(id, userId);
   }
 
   @Delete(':id/delete-favorite')
-  async removeBookFavoriteById(@Param('id') id: number) {
-    return await this.booksService.removeBookFavoriteById(id);
+  async removeBookFavoriteById(
+      @Param('id') id: number,
+      @Query('userId') userId: number
+  ) {
+    return await this.booksService.removeBookFavoriteById(id, userId);
   }
 
   @Delete(':id')
-  async removeBookById(@Param('id') id: number) {
+  async removeBookById(
+      @Param('id') id: number
+  ) {
     await this.booksService.removeBookById(id);
   }
 }

@@ -6,19 +6,9 @@ import {
   ExecutionContext,
 } from '@nestjs/common';
 
-import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { IRequest } from '../types/request';
 import { UserStatus } from '../../users/entities';
 import {HeaderGuard} from "../guards/header.guard";
-
-export function Auth(
-  status: UserStatus = 'ACTIVE',
-) {
-  return applyDecorators(
-    SetMetadata('status', status),
-    UseGuards(JwtAuthGuard),
-  );
-}
 
 export function Headers(
   headers: {[key: string]: string} = {}

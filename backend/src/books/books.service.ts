@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
+import {InjectRepository, InjectEntityManager} from '@nestjs/typeorm';
 import {EntityManager, LessThan, MoreThan} from 'typeorm';
 import {Repository} from 'typeorm';
 import {Book} from './entities';
@@ -15,17 +15,18 @@ export class BooksService {
     ) {
     }
 
-    public async removeBookById(id: number) : Promise<void> {
+    public async removeBookById(id: number): Promise<void> {
         await this.bRepo.delete(id);
     }
 
-    public async getBooks(): Promise<Book[]> {
+    public async getBooks(skip: number, take: number, userId: number): Promise<Book[]> {
         const books = this.entityManager.createQueryBuilder(Book, 'book');
-
+        books.take(skip);
+        books.skip(take);
         return await books.getMany();
     }
 
-    public async getBookById(id: number): Promise<Book> {
+    public async getBookById(id: number, userId: number): Promise<Book> {
         const book = await this.entityManager.createQueryBuilder(Book, 'book')
             .where('book.id = :id', {id})
             .getOne();
@@ -37,15 +38,15 @@ export class BooksService {
         return await this.bRepo.save(body);
     }
 
-    public async recommendations(id: number): Promise<void> {
+    public async recommendations(id: number, userId: number): Promise<void> {
 
     }
 
-    public async removeBookFavoriteById(id: number): Promise<void> {
+    public async removeBookFavoriteById(id: number, userId: number): Promise<void> {
 
     }
 
-    public async addBookFavoriteById(id: number): Promise<void> {
+    public async addBookFavoriteById(id: number, userId: number): Promise<void> {
 
     }
 }

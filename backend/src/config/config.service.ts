@@ -7,7 +7,7 @@ export const app = registerAs('app', () => ({
 }));
 
 export const api = registerAs('api', () => ({
-    knigy: process.env.KNIGY
+    knigi: process.env.KNIGi
 }));
 
 export const jwt = registerAs('jwt', () => ({
