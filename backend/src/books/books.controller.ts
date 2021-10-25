@@ -27,12 +27,15 @@ export class BooksController {
     return await this.booksService.createBook(body);
   }
 
+  @ApiQuery({example: 0, name: 'skip'})
+  @ApiQuery({example: 5, name: 'take'})
   @Get('/recommendations')
   async recommendations(
-      @Param('id') id: number,
-      @Query('userId') userId: number
+      @Query('userId') userId: number,
+      @Query('skip') skip: number = 0,
+      @Query('take') take: number = 5
   ) {
-    return await this.booksService.recommendations(id, userId);
+    return await this.booksService.recommendations(userId, take, skip);
   }
 
   @ApiOkResponse({type: BookResponsesDto})

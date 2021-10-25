@@ -57,13 +57,42 @@ export class BooksService {
         return await this.bRepo.save(body);
     }
 
-    public async recommendations(id: number, userId: number): Promise<void> {
-        const user = await this.uRepo.findOne(userId, {relations: ['history']});
+    public async recommendations(userId: number, take: number, skip: number): Promise<Book[]> {
+        const user = await this.uRepo.findOne(userId, {
+            relations: ['history', 'history.users', 'history.users.history']
+        });
+
         if (!user) {
             throw new NotFoundException()
         }
 
+        const recBooks = {};
+        user.history.forEach((book) => {
+            book.users.forEach((user) => {
+                if (user.id === userId) {
+                    return;
+                }
 
+                user.history.forEach((rBook) => {
+                   if (rBook.title === book.title) {
+                       return;
+                   }
+
+                   recBooks[rBook.title] = recBooks[rBook.title] || rBook;
+                   recBooks[rBook.title].range = recBooks[rBook.title].range || 0;
+                   recBooks[rBook.title].range++;
+
+                   if (rBook.status === 'OLDER') {
+                       recBooks[rBook.title].range = recBooks[rBook.title].range + 0.5;
+                   }
+                });
+            });
+        });
+
+        return Object.keys(recBooks)
+            .map(k => recBooks[k])
+            .sort((a, b) => a.range - b.range)
+            .slice(skip, take);
     }
 
     public async removeBookFavoriteById(title: string, userId: number): Promise<void> {

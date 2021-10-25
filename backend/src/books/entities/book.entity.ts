@@ -69,6 +69,7 @@ export class Book extends BaseEntity {
   status: BookStatus;
 
   favorite: boolean;
+  range: number;
 
   toJSON() {
     return {
@@ -81,7 +82,8 @@ export class Book extends BaseEntity {
       theme: this.theme,
       release_year: this.release_year,
       about: this.about,
-      favorite: this.favorite
+      favorite: this.favorite,
+      range: this.range
     };
   }
 }
