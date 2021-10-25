@@ -26,4 +26,8 @@ export class ResponseUserDto extends UserDto {
     @Type(e => BookResponsesDto)
     @ValidateNested()
     history: BookResponsesDto[];
+
+    @Expose()
+    @IsNumber()
+    id: number;
 }

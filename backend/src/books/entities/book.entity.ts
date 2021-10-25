@@ -68,6 +68,8 @@ export class Book extends BaseEntity {
   })
   status: BookStatus;
 
+  favorite: boolean;
+
   toJSON() {
     return {
       id: this.id,
@@ -79,6 +81,7 @@ export class Book extends BaseEntity {
       theme: this.theme,
       release_year: this.release_year,
       about: this.about,
+      favorite: this.favorite
     };
   }
 }

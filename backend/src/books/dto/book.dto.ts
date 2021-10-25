@@ -61,4 +61,10 @@ export class BookResponsesDto extends BookDto {
     @IsOptional()
     @Expose()
     id: number;
+
+    @ApiProperty({type: 'boolean'})
+    @IsBoolean()
+    @IsOptional()
+    @Expose()
+    favorite: boolean;
 }

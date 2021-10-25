@@ -25,7 +25,7 @@ export class UsersService {
     }
 
     public async getUserById(id: number): Promise<User> {
-        const user = await this.uRepo.findOne(id, {relations: ['history']});
+        const user = await this.uRepo.findOne({id}, {relations: ['history']});
         return user;
     }
 

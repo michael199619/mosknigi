@@ -22,10 +22,10 @@ export class SeedService {
         console.log('[Seed started]');
         const {knigi} = this.serviceConfig.get('api');
         const usersDb = {};
-        // if (await this.entityManager.findOne(User)) {
-        //     console.log('[Seed success]');
-        //     return false;
-        // }
+        if (await this.entityManager.findOne(User)) {
+            console.log('[Seed success]');
+            return false;
+        }
 
         await async.eachLimit(users, 15, (async (user) => {
             const text = user.source_url.split('/');
@@ -69,16 +69,10 @@ export class SeedService {
             })
         });
 
-        await this.entityManager.delete(Book, {})
-        await this.entityManager.delete(User, {})
-
         const saveBooks = await this.entityManager.save(Book, Object.keys(books).map(k => books[k]));
         await this.entityManager.save(User, Object.keys(usersDb).map((k) => ({
             id: usersDb[k].id,
             history: usersDb[k].books.map(e => saveBooks.find(b => e.url === b.url))
         })));
-
-        console.log('[Creating User started]');
-
     }
 }

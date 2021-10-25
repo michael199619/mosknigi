@@ -46,18 +46,18 @@ export class BooksController {
 
   @Post(':id/add-favorite')
   async addBookFavoriteById(
-      @Param('id') id: number,
+      @Param('title') title: string,
       @Query('userId') userId: number
   ) {
-    return await this.booksService.addBookFavoriteById(id, userId);
+    return await this.booksService.addBookFavoriteById(title, userId);
   }
 
   @Delete(':id/delete-favorite')
   async removeBookFavoriteById(
-      @Param('id') id: number,
+      @Param('tile') title: string,
       @Query('userId') userId: number
   ) {
-    return await this.booksService.removeBookFavoriteById(id, userId);
+    return await this.booksService.removeBookFavoriteById(title, userId);
   }
 
   @Delete(':id')
